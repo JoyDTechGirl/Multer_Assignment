@@ -31,7 +31,7 @@ exports.getAModel = async(req,res) => {
   try{
     const {id} = req.params;
 
-    const model = userModel.findById(id)
+    const model = await userModel.findById(id)
 
     if(!model){
       return res.status(404).json({message: 'Model Not Found'})
