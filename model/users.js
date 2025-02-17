@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
   },
   profileImage: {
     type:String,
-    require: true
+    require:true
   },
   catalogs: [
     {
