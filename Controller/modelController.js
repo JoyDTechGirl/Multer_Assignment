@@ -125,15 +125,18 @@ exports.deleteAModel = async(req,res) => {
       return res.status(404).json({message: 'Model Not Found'})
     }
 
-    if (model.profileImage && fs.existsSync`./upload/${model.profileImage}`) {
-      fs.unlinkSync(`./upload/${model.profileImage}`)
+    const profileImagePath = `./upload/${model.profileImage}`;
+    if (model.profileImage && fs.existsSync(profileImagePath)) {
+      fs.unlinkSync(profileImagePath);
     }
 
     model.catalogs.forEach((image) => {
-      if (fs.existsSync(`./upload/${image}`)) {
-        fs.unlinkSync(`./upload/${image}`)
+      const catalogImagePath = `./upload/${image}`;
+      if (fs.existsSync(catalogImagePath)) {
+        fs.unlinkSync(catalogImagePath);
       }
     });
+    
     const deletedModel = await userModel.findByIdAndDelete(id)
     res.status(200).json({message:'Model Successfully Deleted',data:deletedModel})
 
