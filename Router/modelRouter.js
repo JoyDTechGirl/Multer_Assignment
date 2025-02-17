@@ -6,13 +6,13 @@ const router = require("express").Router();
 
 // router.post("/models", upload.array("catalogs", 3), createAModel);
 
-router.post('/models',upload.fields([{ name: 'profileImage', maxCount: 1 }, { name: 'catalogs', maxCount: 10 }]), createAModel)
+router.post('/models',upload.fields([{ name: 'profileImage', maxCount: 1 }, { name: 'catalogs', maxCount: 5}]),createAModel)
 
 router.get("/models/:id", getAModel)
 
 router.get('/models',getAllModel)
 
-router.patch("/models/:id", upload.array("catalogs", 3), updateAModel);
+router.patch('/models/:id',upload.fields([{ name: 'profileImage', maxCount: 1 }, { name: 'catalogs', maxCount: 5 }]),updateAModel)
 
 router.delete("/models/:id", upload.array("catalogs", 3), deleteAModel);
 

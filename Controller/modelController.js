@@ -105,7 +105,7 @@ exports.updateAModel = async(req,res) => {
         });
       }
     };
-    const updatedModel = userModel.findByIdAndUpdate(id,data,{new:true})
+    const updatedModel = await userModel.findByIdAndUpdate(id,data,{new:true})
     res.status(200).json({message: 'Model Successfully Updated',data:updatedModel})
   }catch(err){
     console.log(err.message)
