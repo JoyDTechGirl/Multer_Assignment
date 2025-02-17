@@ -1,31 +1,30 @@
 const userModel = require("../model/users");
 const fs = require("fs");
 
+
 exports.createAModel = async (req, res) => {
   try {
     const { fullName, email, password } = req.body;
+    const { profileImage, catalogs } = req.files;
 
-    const { profileImage } = req.files;
-
-    const { catalogs } = req.files
-    // .map((e) => e.filename);
+    // console.log("Profile Image:", profileImage);
+    // console.log("Catalogs:", catalogs);
 
     const model = await userModel.create({
       fullName,
-      email:email.toLowerCase(),
+      email: email.toLowerCase(),
       password,
-      profileImage: file.originalname,
-      catalogs: files,
+      profileImage: profileImage[0].originalname, 
+      catalogs: catalogs.map((file) => file.filename), 
     });
 
-    res
-      .status(201)
-      .json({ message: "Modeling User Created Successfully", data: model });
+    res.status(201).json({ message: "Modeling User Created Successfully", data: model });
   } catch (err) {
     console.log(err.message);
     res.status(500).json({ message: "Error Creating Model" });
   }
 };
+
 
 
 exports.getAModel = async(req,res) => {
